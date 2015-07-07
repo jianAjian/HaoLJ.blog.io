@@ -152,23 +152,43 @@ sup {
 	}
 }
 </style>
-<title>自定义push动画效果</title>
+<title>自定义控制器动画切换效果</title>
 
 </head>
 <body>
-<h1>自定义push动画效果</h1>
+<h1>自定义控制器动画切换效果</h1>
 
-<p>原文网址-<a href="http://">-http://www.raywenderlich.com/86521/how-to-make-a-view-controller-transition-animation-like-in-the-ping-app</a>(本文在此基础修改)</p>
+<p>之前在微博上看到有人转发的这种效果,一直想学习,偶尔一次在一个帖子上看到实现过程,<a href="http://25.io/mou/" title="Markdown editor on Mac OS X">原文</a> 使用swift实现.</p>
 
 <p><strong>实现效果如下</strong></p>
 
+<p><img src="./images/pushAnimation.gif" title="效果图1" alt="alt text" /></p>
+
+<p>wow  效果太赞了 👍</p>
+
+<h2>基础知识:</h2>
+
+<p><strong>1.shape layer,maskLayer,CA动画的使用</strong>(关于<a href="layer.html">layer的使用</a>)</p>
+
+<p><strong>2. UIViewControllerAnimatedTransitioning协议和类UIPercentDrivenInteractiveTransition的使用</strong></p>
+
+<p><strong>3.其他的小技巧(比如使用xib中如何实现圆角button)</strong></p>
+
+<p>如果你上述知识不熟悉可以自行点开链接去补充下.这里不做详细介绍</p>
+
 <p><br/></p>
 
-<center>
-<img src="http://cdn4.raywenderlich.com/wp-content/uploads/2014/12/ping.gif"></img>
-</center>
+<h2>大致步骤:</h2>
+
+<ol>
+<li><strong>在NavgationController 的代理方法中捕获到切换上下文 然后读取目的控制器(ToViewController)的view,贴到上下文的视图上面.</strong></li>
+<li><strong>计算点击的按钮的形状(shaper)  和屏幕的shaper 作为CA动画的开始值和结束值 在目的控制器(ToViewController)上面执行动画.</strong></li>
+<li><strong>动画结束后移除mask,并且通知上下文切换结束了.</strong></li>
+<li><strong>通过UIPercentDrivenInteractiveTransition类可以控制切换的进度,结合手势读取进度值,实现最后的自由控制效果.</strong></li>
+</ol>
 
 
-
+<p><br/>
+原文网址-<a href="http://">-http://www.raywenderlich.com/86521/how-to-make-a-view-controller-transition-animation-like-in-the-ping-app</a>(本文在此基础修改)</p>
 </body>
 </html>
